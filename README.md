@@ -86,7 +86,7 @@ Shell scripts to start the application locally (`run_app.sh`), via docker (`run_
 
 ## Design Summary
 
-The code across the different files (`config.py`, `app.py`, `api.yml`, `models.py`, `chart_data.py`) represents Flask application leveraging Connexion for API management, SQLAlchemy for Object-Relational Mapping (ORM), and Marshmallow for serialization. Here's a summary of the key design decisions and their rationale:
+The code across the different files (`config.py`, `app.py`, `api.yml`, `models.py`, `chart_data.py`) represents a Flask application leveraging Connexion for API management, SQLAlchemy for Object-Relational Mapping (ORM), and Marshmallow for serialization. Here's a summary of the key design decisions and their rationale:
 
 ### 1. **Use of Connexion**
 
