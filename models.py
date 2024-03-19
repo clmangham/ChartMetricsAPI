@@ -1,18 +1,16 @@
-# models.py
-
+# Import necessary modules and objects
 from datetime import datetime
 from config import db, ma
 from marshmallow_sqlalchemy import fields as msfields
-from marshmallow import Schema, fields, post_dump
+from marshmallow import Schema, fields
 
 
 
-# Tables / Data Models
+# Define the ORM models for the database tables
 class Observation_Type(db.Model):
     __tablename__ = 'Observation_Type'
     Id = db.Column(db.Integer, primary_key=True)
     Name = db.Column(db.Text)
-
 
 class Result_Status(db.Model):
     __tablename__ = 'Result_Status'
@@ -25,6 +23,7 @@ class Unit_Of_Measure(db.Model):
     Id = db.Column(db.Integer, primary_key=True)
     Name = db.Column(db.Text)
 
+# Marshmallow Schemas for serialization and deserialization
 class ObservationSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Observation_Type
@@ -88,6 +87,8 @@ class DataSchema(ma.SQLAlchemyAutoSchema):
     ERROR = fields.Integer(allow_none=True)
     WARNING = fields.Integer(allow_none=True)
     STOPPED = fields.Integer()
+
+    # Custom methods to get related data
     observation_type = fields.Method("get_observation_type")
     result_status = fields.Method("get_result_status")
     unit_of_measure = fields.Method("get_unit_of_measure")
@@ -101,12 +102,9 @@ class DataSchema(ma.SQLAlchemyAutoSchema):
     def get_unit_of_measure(self, obj):
         return obj.unit_of_measure.Name if obj.unit_of_measure else None
 
-# Init schema
-datum_schema =  DataSchema()
-data_schema = DataSchema(many = True)
 
 
-
+# Schemas for API output
 class AggregatedDataSchema(Schema):
     Observation_Type = fields.Str()
     Unit_Of_Measure = fields.Str()
@@ -115,7 +113,9 @@ class AggregatedDataSchema(Schema):
     Min_Value = fields.Float()
     Max_Value = fields.Float()
 
-# Initialize the schema
+# Initialize the schema instances
+datum_schema =  DataSchema()
+data_schema = DataSchema(many = True)
 aggregated_data_schema = AggregatedDataSchema(many=True)
 
 

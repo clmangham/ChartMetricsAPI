@@ -7,8 +7,3 @@ services:
       - "5001:8000"  # Map host port 5001 to container port 8000
     volumes:
       - ./randomized_chart_data.sqlite:/app/randomized_chart_data.sqlite  # Mount the .sqlite file
-    # environment:
-    #   - FLASK_ENV=development
-
-# volumes:
-#   data:

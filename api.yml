@@ -13,13 +13,13 @@ paths:
       operationId: "chart_data.get_chart_data_by_ids"
       tags:
         - "Records"
-      summary: "Data for a comma separated list of Ids"
+      summary: "Retrieves data for a comma-separated list of Ids"
       parameters:
         - in: query
           name: Ids
           schema:
             type: string
-          description: "Comma-separated list of Ids"
+          description: "Comma-separated list of Ids to fetch corresponding records"
           required: True
           style: form
           example: "1,2,3"
@@ -27,22 +27,22 @@ paths:
         "200":
           description: "Successfully retrieved data by Ids"
         "400":
-          description: "Invalid ID format"
+          description: "Invalid Id format, expected a comma-separated list of numbers"
   /summary/sql:
     get:
       operationId: "chart_data.get_aggregated_chart_data_sql"
       tags:
         - "Summary Data"
-      summary: "Summary of chart data using SQLAlchemy"
+      summary: "Provides summary of chart data using using SQLAlchemy"
       responses:
         "200":
-          description: "Successfully retrieved data."
+          description: "Successfully aggregated and retrieved data using SQL"
   /summary/pandas:
     get:
       operationId: "chart_data.get_aggregated_chart_data_pandas"
       tags:
         - "Summary Data"
-      summary: "Summary of chart data using Pandas"
+      summary: "Generates summary of chart data using Pandas for data manipulation"
       responses:
         "200":
-          description: "Successfully retrieved data."
+          description: "Successfully aggregated and retrieved data using Pandas"

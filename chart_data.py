@@ -10,15 +10,17 @@ from models import (
     datum_schema,
     aggregated_data_schema,
 )
-from sqlalchemy import func, and_
-from sqlalchemy import case
+from sqlalchemy import func, and_, case
 import pandas as pd
 from collections import OrderedDict
 
+
+# Function to retrieve chart data by a list of IDs
 def get_chart_data_by_ids(Ids):
+    # Convert the comma-separated ID string into a list of integers
     ids = [int(id_str) for id_str in Ids.split(",") if id_str.isdigit()]
 
-    # Query the Chart_Data objects fully, including related entities
+    # Query the database for records with the specified IDs, including related data
     result = (
         db.session.query(Chart_Data)
         .outerjoin(Observation_Type)
@@ -28,6 +30,7 @@ def get_chart_data_by_ids(Ids):
         .all()
     )
 
+    # Serialize the query result into JSON format and return
     return data_schema.dump(result)
 
     # # Manual serialization to ensure order
@@ -49,7 +52,8 @@ def get_chart_data_by_ids(Ids):
     # return serialized_result
 
 
-
+# Function to get aggregated data using SQL queries
+# Perform an SQL query to aggregate data, applying conditions and grouping by relevant fields
 def get_aggregated_chart_data_sql():
     result = (
         db.session.query(
@@ -68,22 +72,32 @@ def get_aggregated_chart_data_sql():
                     else_=0,
                 )
             ).label("Valid_Records"),
-            func.count().label(
-                "Num_Admissions"
-            ),  # You can use func.count() without '*'
+            func.count().label("Num_Admissions"),
             func.min(Chart_Data.VALUENUM).label("Min_Value"),
             func.max(Chart_Data.VALUENUM).label("Max_Value"),
         )
-        .join(Observation_Type, Observation_Type.Id == Chart_Data.Observation_Type_Id, isouter=True)
-        .join(Result_Status, Result_Status.Id == Chart_Data.Result_Status_Id, isouter=True)
-        .join(Unit_Of_Measure, Unit_Of_Measure.Id == Chart_Data.Unit_Of_Measure_Id, isouter=True)
+        .join(
+            Observation_Type,
+            Observation_Type.Id == Chart_Data.Observation_Type_Id,
+            isouter=True,
+        )
+        .join(
+            Result_Status, Result_Status.Id == Chart_Data.Result_Status_Id, isouter=True
+        )
+        .join(
+            Unit_Of_Measure,
+            Unit_Of_Measure.Id == Chart_Data.Unit_Of_Measure_Id,
+            isouter=True,
+        )
         .group_by(Observation_Type.Name, Unit_Of_Measure.Name)
         .all()
-    )  # Group by both fields
+    )
 
+    # Serialize and return the aggregated data
     return aggregated_data_schema.dump(result)
 
 
+# Function to get aggregated data using Pandas for data processing
 def get_aggregated_chart_data_pandas():
     # Establish a connection to the SQLite database
     conn = sqlite3.connect("randomized_chart_data.sqlite")
@@ -97,7 +111,7 @@ def get_aggregated_chart_data_pandas():
     # Close the connection
     conn.close()
 
-    # Merge the DataFrames
+    # Perform data merging and renaming for clarity
     merged_df = chart_data_df.merge(
         observation_type_df, left_on="Observation_Type_Id", right_on="Id", how="left"
     )
@@ -119,7 +133,7 @@ def get_aggregated_chart_data_pandas():
     )
     merged_df = merged_df.rename(columns={"Name_u": "Unit_Of_Measure"})
 
-    # Calculate Valid Records
+    # Define conditions for valid records and perform data aggregation
     conditions = (
         (merged_df["ERROR"] != 1)
         & (merged_df["WARNING"] != 1)
@@ -142,4 +156,5 @@ def get_aggregated_chart_data_pandas():
     ]
     aggregated_data = aggregated_data.reset_index()
 
+    # Return the aggregated data as a dictionary
     return aggregated_data.to_dict(orient="records")
