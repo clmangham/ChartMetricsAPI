@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5001:8000"  # Expose the application on port 5001 on the host
+    volumes:
+      - ./randomized_chart_data.sqlite:/app/randomized_chart_data.sqlite  # Mount the .sqlite file
+    # environment:
+    #   - FLASK_ENV=development
+
+# volumes:
+#   data:

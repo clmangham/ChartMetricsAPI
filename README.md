@@ -57,13 +57,21 @@ docker-compose up --build
 
 After running the application API can now be accessed at http://localhost:5001
 
+*Note: If running locally outside docker the API will be accessed at port 8000 - http://localhost:8000*
+
 ### Example Usage
 
-As web address or with POSTMAN (GET):
+A user interface with API documentation and example queries can be found at http://localhost:5001/ui/
+
+#### OR
+
+Use as web address or with POSTMAN (GET):
 
 ```
 http://localhost:5001/records?Ids=1,2,3
 ```
+
+#### OR
 
 Using Curl:
 ```

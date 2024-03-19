@@ -1,0 +1,50 @@
+# swagger.yml
+
+openapi: 3.0.0
+info:
+  title: "Medical Database API"
+  description: "API with three endpoints to return data from a medical database. "
+  version: "1.0.0"
+
+servers:
+  - url: "/"
+
+paths:
+  /records:
+    get:
+      operationId: "chart_data.get_chart_data_by_ids"
+      tags:
+        - "Records"
+      summary: "Data for a comma separated list of Ids"
+      parameters:
+        - in: query
+          name: Ids
+          schema:
+            type: string
+          description: "Comma-separated list of Ids"
+          required: True
+          style: form
+          example: "1,2,3"
+      responses:
+        "200":
+          description: "Successfully retrieved data by Ids"
+        "400":
+          description: "Invalid ID format"
+  /summary/sql:
+    get:
+      operationId: "chart_data.get_aggregated_chart_data_sql"
+      tags:
+        - "Summary Data"
+      summary: "Summary of chart data using SQLAlchemy"
+      responses:
+        "200":
+          description: "Successfully retrieved data."
+  /summary/pandas:
+    get:
+      operationId: "chart_data.get_aggregated_chart_data_pandas"
+      tags:
+        - "Summary Data"
+      summary: "Summary of chart data using Pandas"
+      responses:
+        "200":
+          description: "Successfully retrieved data."

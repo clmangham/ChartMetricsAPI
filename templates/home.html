@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Database API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #0056b3;
+        }
+        p {
+            line-height: 1.6;
+        }
+        a {
+            color: #0056b3;
+        }
+        .code {
+            background-color: #eee;
+            padding: 10px;
+            display: block;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Medical Database API</h1>
+        </header>
+        <section>
+            <h2>About the API</h2>
+            <p>This API provides access to medical chart data, allowing for querying individual records and aggregating data across various dimensions.</p>
+        </section>
+        <section>
+            <h2>Endpoints</h2>
+            <p><strong>Record Lookup:</strong> Retrieve data for a comma-separated list of IDs.</p>
+            <div class="code">
+                GET /records/{ids}
+            </div>
+            <p><strong>Data Summary (SQL):</strong> Aggregate data using SQL queries.</p>
+            <div class="code">
+                GET /summary/sql
+            </div>
+            <p><strong>Data Summary (Pandas):</strong> Aggregate data using Pandas in Python.</p>
+            <div class="code">
+                GET /summary/pandas
+            </div>
+        </section>
+        <section>
+            <h2>Getting Started</h2>
+            <p>To start using the API, you can make HTTP requests to the above endpoints. Please refer to the <a href="ui">documentation</a> for detailed information on request and response formats.</p>
+        </section>
+        <section>
+            <h2>Contact</h2>
+            <p>If you have any questions or feedback, please reach out to me at <a href="mailto:camaron.mangham@gmail.com">camaron.mangham@gmail.com</a>.</p>
+        </section>
+    </div>
+</body>
+</html>
