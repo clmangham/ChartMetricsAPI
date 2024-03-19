@@ -79,4 +79,4 @@ curl "http://localhost:5001/summary/pandas"
 ```
 
 ### Run with Shell Scripts
-Shell scripts to start the application locally (`run_app.sh`), via docker (`start_docker.sh`), and to run sample commands (`sample_api_query.sh`) are also provided.
+Shell scripts to start the application locally (`run_app.sh`), via docker (`run_docker.sh`), and to run sample commands (`sample_api_query.sh`) are also provided.
