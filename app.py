@@ -1,6 +1,5 @@
-from flask import render_template, jsonify
+from flask import render_template
 import config
-from models import Chart_Data
 
 
 app = config.connex_app
@@ -8,8 +7,6 @@ app.add_api(config.basedir / "api.yml")
 
 @app.route("/")
 def home():
-    # data = Chart_Data.query.limit(10).all()
-    # return render_template("home.html", data=data)
 
     return render_template("home.html")
 
