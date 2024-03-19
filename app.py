@@ -4,7 +4,7 @@ from models import Chart_Data
 
 
 app = config.connex_app
-app.add_api(config.basedir / "swagger.yml")
+app.add_api(config.basedir / "api.yml")
 
 @app.route("/")
 def home():
