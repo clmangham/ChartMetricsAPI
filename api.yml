@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: "Medical Database API"
+  title: "ChartMetricsAPI"
   description: "API with three endpoints to return data from a medical database. "
   version: "1.0.0"
 
