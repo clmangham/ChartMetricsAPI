@@ -57,7 +57,14 @@ docker-compose up --build
 
 After running the application API can now be accessed at http://localhost:5001
 
-*Note: If running locally outside docker the API will be accessed at port 8000 - http://localhost:8000*
+#### To run without docker using python 3.8:
+
+```
+pip install -r requirements.txt
+python app.py
+```
+
+####  *Note: If running locally outside docker the API will be accessed at port 8000 - http://localhost:8000*
 
 ### Example Usage
 
@@ -88,7 +95,7 @@ Shell scripts to start the application locally (`run_app.sh`), via docker (`run_
 
 The code across the different files (`config.py`, `app.py`, `api.yml`, `models.py`, `chart_data.py`) represents a Flask application leveraging Connexion for API management, SQLAlchemy for Object-Relational Mapping (ORM), and Marshmallow for serialization. Here's a summary of the key design decisions and their rationale:
 
-### 1. **Use of Connexion**
+### 1. **Use of Connexion + Flask**
 
 - **Decision**: Implement the API with Connexion, defining endpoints in `api.yml`.
 - **Rationale**: Connexion provides a robust framework for handling RESTful APIs in Flask applications. It allows for defining APIs using the OpenAPI specification, which enhances API documentation and validation. This approach ensures a clear separation between the API definition and business logic, improving maintainability and scalability.
