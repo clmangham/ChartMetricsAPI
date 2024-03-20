@@ -2,6 +2,7 @@ import requests
 import pandas as pd
 
 # Test using local API (app.py - not dockerized)
+# Endpoints 2 and 3 should return same rows even if sorting is a bit different
 
 def fetch_data(url):
     response = requests.get(url)

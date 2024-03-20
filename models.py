@@ -1,7 +1,6 @@
 # Import necessary modules and objects
 from datetime import datetime
 from config import db, ma
-from marshmallow_sqlalchemy import fields as msfields
 from marshmallow import Schema, fields
 
 
@@ -77,10 +76,6 @@ class DataSchema(ma.SQLAlchemyAutoSchema):
         exclude = ('HADM_ID', 'ICUSTAY_ID', 'Observation_Type_Id', 'Result_Status_Id', 'SUBJECT_ID', 'Unit_Of_Measure_Id')  # Exclude fields
         ordered = True
 
-    # observation_type = msfields.Nested(ObservationSchema)
-    # result_status = msfields.Nested(ResultSchema)
-    # unit_of_measure = msfields.Nested(MeasureSchema)
-
     Id = fields.Integer()
     CHARTTIME = fields.DateTime()
     VALUENUM = fields.Float()
@@ -101,8 +96,6 @@ class DataSchema(ma.SQLAlchemyAutoSchema):
 
     def get_unit_of_measure(self, obj):
         return obj.unit_of_measure.Name if obj.unit_of_measure else None
-
-
 
 # Schemas for API output
 class AggregatedDataSchema(Schema):

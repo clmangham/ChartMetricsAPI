@@ -1,4 +1,3 @@
-# Import necessary modules from Flask and the configuration file
 from flask import render_template
 import config
 
@@ -6,7 +5,6 @@ import config
 app = config.connex_app
 
 # Add the API endpoints to the app based on the OpenAPI specification file (api.yml)
-# This file defines the API structure, endpoints, and their corresponding operations
 app.add_api(config.basedir / "api.yml")
 
 # Define a route for the root URL which serves the home page of the application

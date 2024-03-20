@@ -62,11 +62,11 @@ pip install -r requirements.txt
 python app.py
 ```
 
-####  *Note: If running locally outside docker the API will be accessed at port 8000 - http://localhost:8000*
+*Note: If running locally outside docker the API will be accessed at port 8000 - http://localhost:8000*
 
 ## Example Usage
 
-### User interface with API documentation and example queries: http://localhost:5001/ui/
+#### User interface with API documentation and example queries: http://localhost:5001/ui/
 
 ![](assets/swagger_ui.gif)
 

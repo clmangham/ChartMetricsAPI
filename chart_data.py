@@ -6,13 +6,10 @@ from models import (
     Result_Status,
     Unit_Of_Measure,
     data_schema,
-    datum_schema,
     aggregated_data_schema,
 )
 from sqlalchemy import func, and_, case, or_
 import pandas as pd
-from flask import jsonify
-
 
 # Function to retrieve chart data by a list of IDs
 def get_chart_data_by_ids(Ids):
@@ -31,7 +28,6 @@ def get_chart_data_by_ids(Ids):
 
     # Serialize the query result into JSON format and return
     return data_schema.dump(result)
-
 
 # Function to get aggregated data using SQL queries
 # Perform an SQL query to aggregate data, applying conditions and grouping by relevant fields
@@ -150,5 +146,3 @@ def get_aggregated_chart_data_pandas():
 
     # Return the aggregated data as a dictionary
     return aggregated_data_schema.dump(aggregated_data.to_dict(orient="records"))
-    # return aggregated_data.to_dict(orient="records")
-

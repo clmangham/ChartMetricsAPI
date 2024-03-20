@@ -1,4 +1,3 @@
-# Import necessary libraries
 import pathlib
 import connexion
 from flask_sqlalchemy import SQLAlchemy
@@ -16,8 +15,7 @@ connex_app = connexion.App(__name__, specification_dir=basedir)
 # Extract the underlying Flask app from the Connexion app.
 app = connex_app.app
 
-# Configure the SQLAlchemy database URI.
-# This application uses SQLite for simplicity and ease of setup, and the database file is located in the base directory.
+# Configure the SQLAlchemy database URI - The database file is located in the base directory.
 app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{basedir / 'randomized_chart_data.sqlite'}"
 
 # Disable SQLAlchemy's modification tracking feature for performance reasons.
