@@ -145,5 +145,10 @@ def get_aggregated_chart_data_pandas():
     ]
     aggregated_data = aggregated_data.reset_index()
 
+    # Convert NaN to None to match with SQL
+    aggregated_data = aggregated_data.where(pd.notnull(aggregated_data), None)
+
     # Return the aggregated data as a dictionary
     return aggregated_data_schema.dump(aggregated_data.to_dict(orient="records"))
+    # return aggregated_data.to_dict(orient="records")
+
