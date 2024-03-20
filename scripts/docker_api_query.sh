@@ -1,9 +1,11 @@
 #!/bin/bash
 
+# Query the API running in Docker
+
 # Usage Examples:
-# shell_scripts/docker_api_query.sh
+# scripts/docker_api_query.sh
 # OR
-# bash shell_scripts/docker_api_query.sh
+# bash scripts/docker_api_query.sh
 
 # Function to display menu and get user choice
 echo

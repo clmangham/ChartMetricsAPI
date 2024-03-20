@@ -1,9 +1,12 @@
 #!/bin/bash
 
+# Query the API running (Not in Docker)
+
+
 # Usage Examples:
-# shell_scripts/flask_api_query.sh
+# scripts/flask_api_query.sh
 # OR
-# bash shell_scripts/flask_api_query.sh
+# bash scripts/flask_api_query.sh
 
 # Function to display menu and get user choice
 echo

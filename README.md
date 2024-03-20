@@ -35,8 +35,6 @@ The ChartMetricsAPI project is designed to demonstrate proficiency in developing
 
 ## Getting Started
 
-The application is containerized using Docker, which simplifies deployment and ensures that the application runs the same in every environment.
-
 ### Prerequisites
 
 - Docker
@@ -66,63 +64,34 @@ python app.py
 
 ####  *Note: If running locally outside docker the API will be accessed at port 8000 - http://localhost:8000*
 
-### Example Usage
+## Example Usage
 
-A user interface with API documentation and example queries can be found at http://localhost:5001/ui/
+### User interface with API documentation and example queries: http://localhost:5001/ui/
 
-#### OR
+![](assets/swagger_ui.gif)
 
-Use as web address or with POSTMAN (GET):
+Example as web address or with POSTMAN (GET):
 
 ```
 http://localhost:5001/records?Ids=1,2,3
 ```
 
-#### OR
-
-Using Curl:
+Example using Curl:
 ```
 curl "http://localhost:5001/summary/pandas"
 ```
 
-### Run with Shell Scripts
+## Run app with scripts
 Shell scripts to start the application locally (`run_app.sh`), or via docker (`run_docker.sh`), and to run sample commands (`flask_api_query.sh`), (`docker_api_query.sh`) are also provided in `\scripts`.
-
-
-
 
 ## Design Summary
 
-The code across the different files (`config.py`, `app.py`, `api.yml`, `models.py`, `chart_data.py`) represents a Flask application leveraging Connexion for API management, SQLAlchemy for Object-Relational Mapping (ORM), and Marshmallow for serialization. Here's a summary of the key design decisions and their rationale:
+The Flask application utilizes Connexion for API routing, SQLAlchemy for ORM, and Marshmallow for serialization. Key design choices include:
 
-### 1. **Use of Connexion + Flask**
+- **Connexion + Flask**: Uses Connexion for RESTful API management, leveraging OpenAPI for clear API documentation and validation, enhancing maintainability.
+- **API Specification in YAML**: Defines API in `api.yml` for readability and easy modification, utilizing OpenAPI for automatic routing and validation.
+- **SQLAlchemy ORM**: Models data in `models.py`, abstracting SQL queries for cleaner, safer code, and ensuring data consistency.
+- **Marshmallow Serialization**: Integrates with SQLAlchemy in models.py for efficient data serialization/deserialization, offering advanced validation and transformation.
+- **Data Handling**: Functions defined in `chart_data.py` centralize data processing, promoting modularity and easier testing.
 
-- **Decision**: Implement the API with Connexion, defining endpoints in `api.yml`.
-- **Rationale**: Connexion provides a robust framework for handling RESTful APIs in Flask applications. It allows for defining APIs using the OpenAPI specification, which enhances API documentation and validation. This approach ensures a clear separation between the API definition and business logic, improving maintainability and scalability.
-
-### 2. **API Specification in YAML**
-
-- **Decision**: Use `api.yml` to define the API structure, endpoints, and expected responses.
-- **Rationale**: YAML is human-readable and widely used for configuration files. By using `api.yml` for the API specification, the project benefits from an easily understandable and modifiable API structure. This external definition file also aids in auto-generating routing and validation based on the OpenAPI standard.
-
-### 3. **Data Modeling with SQLAlchemy**
-
-- **Decision**: Define data models in `models.py` using SQLAlchemy ORM.
-- **Rationale**: SQLAlchemy abstracts away SQL queries and provides a high-level ORM interface to interact with the database. This makes the code cleaner, easier to write and maintain, and reduces the likelihood of SQL injection vulnerabilities. It also promotes code reusability and data consistency.
-
-### 4. **Serialization with Marshmallow**
-
-- **Decision**: Use Marshmallow schemas in `models.py` for data serialization and deserialization.
-- **Rationale**: Marshmallow integrates seamlessly with SQLAlchemy models to provide easy serialization of query results to JSON, which is essential for RESTful API responses. It also supports advanced validations and transformations, enhancing the robustness and flexibility of data handling.
-
-### 5. **Data Access and Processing Layer**
-
-- **Decision**: Implement functions in `chart_data.py` to handle data retrieval and processing.
-- **Rationale**: Isolating the data access and processing logic in `chart_data.py` separates concerns within the application, making the codebase more organized and modular. This approach enables easier unit testing and refactoring when business requirements change.
-
-### 6. **Configuration and Environment Management**
-
-- **Decision**: Centralize configuration settings in `config.py`.
-- **Rationale**: Having a dedicated configuration file (`config.py`) simplifies managing application settings (like database URI) and enhances the application's scalability and adaptability to different environments (development, testing, production).
-
-These design decisions collectively support the development of a robust, scalable, and maintainable web API application. The chosen tools and frameworks (Flask, Connexion, SQLAlchemy, Marshmallow) are well-established in the Python community, offering extensive documentation, community support, and compatibility, thereby reducing the long-term maintenance overhead and ensuring the application's longevity and reliability.
+These decisions foster a robust, scalable Flask API, supported by a strong Python community and extensive documentation, ensuring long-term stability and maintainability.
