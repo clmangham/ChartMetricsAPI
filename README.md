@@ -86,7 +86,7 @@ curl "http://localhost:5001/summary/pandas"
 ```
 
 ### Run with Shell Scripts
-Shell scripts to start the application locally (`run_app.sh`), via docker (`run_docker.sh`), and to run sample commands (`flask_api_query.sh`), (`docker_api_query.sh`) are also provided.
+Shell scripts to start the application locally (`run_app.sh`), or via docker (`run_docker.sh`), and to run sample commands (`flask_api_query.sh`), (`docker_api_query.sh`) are also provided in `\scripts`.
 
 
 
